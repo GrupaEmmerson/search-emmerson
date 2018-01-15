@@ -1,0 +1,265 @@
+// Here you can add other styles
+body{
+  background-color: #151b1e;
+  color: #151b1e;
+}
+
+#left {
+  position: fixed;
+  top: 55px;
+  bottom: 0;
+  left: 0!important;
+  z-index: 999;
+}
+
+.sidebar{
+  z-index: 9999999;
+}
+
+.right-bar{
+  position: absolute;
+  right: 0;
+}
+
+.nopadding {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.search-color{
+  background-color: #555d65;
+  border: 1px solid #32373e;
+  color: #fff;
+}
+
+// Create placeholder mixin
+@mixin placeholder($color, $size:"") {
+  &::-webkit-input-placeholder {
+    color: $color;
+    @if $size != "" {
+      font-size: $size;
+    }
+  }
+  &:-moz-placeholder {
+    color: $color;
+    @if $size != "" {
+      font-size: $size;
+    }
+  }
+  &::-moz-placeholder {
+    color: $color;
+    @if $size != "" {
+      font-size: $size;
+    }
+  }
+  &:-ms-input-placeholder {
+    color: $color;
+    @if $size != "" {
+      font-size: $size;
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  #left {
+    position: relative;
+    height: 550px;
+    top: 0;
+    bottom: 0;
+  }
+  .right-bar{
+    position: relative;
+  }
+  .smalltitle2 {
+    min-height:166px;
+  }
+}
+
+@media (max-width: 770px) {
+  .smalltitle2 {
+    min-height:366px!important;
+    margin: 0;
+  }
+  .search-box{
+    margin-top: 45px!important;
+  }
+  .offer-info{
+    margin-top: 300px!important;
+  }
+}
+
+// Use placeholder mixin (the size parameter is optional)
+[placeholder] {
+  @include placeholder(#fff, 14px);
+}
+
+.smalltitle2 {
+  border-bottom: medium solid #e3001b;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  width:auto;
+  height: auto;
+  min-height:100%;
+  min-width:100%;
+  font-family: 'Barlow Condensed', sans-serif;
+}
+
+.icons-top-right{
+  float: right;
+}
+
+.offer-text{
+  color: #fff;
+  text-shadow: 2px 3px 8px #32373e;
+  margin-left: 0;
+  padding-bottom: 10px;
+
+  background: rgba(0,0,0,0);
+  background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.39) 53%, rgba(0,0,0,0.73) 100%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(0,0,0,0)), color-stop(53%, rgba(0,0,0,0.39)), color-stop(100%, rgba(0,0,0,0.73)));
+  background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.39) 53%, rgba(0,0,0,0.73) 100%);
+  background: -o-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.39) 53%, rgba(0,0,0,0.73) 100%);
+  background: -ms-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.39) 53%, rgba(0,0,0,0.73) 100%);
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.39) 53%, rgba(0,0,0,0.73) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#000000', GradientType=0 );
+}
+
+.offer-info{
+  width: auto;
+  height: auto;
+  min-height: 100%;
+  min-width: 100%;
+  margin-top: 200px;
+}
+
+.flex-container {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.btn-outline-emmerson{
+  color: #e3001b;
+  background-color: transparent;
+  background-image: none;
+  border-color: #e3001b;
+}
+
+.btn-outline-emmerson:hover {
+  color: #fff;
+  background-color: #e3001b;
+  border-color: #e3001b;
+}
+
+.btn-outline-light:hover{
+  color: #fff!important;
+  background-color: #343a40!important;
+  border-color: #343a40!important;
+}
+
+.search-color-text{
+  color: #fff!important;
+}
+
+.loader {
+  border: 4px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 4px solid #e3001b;
+  width: 35px;
+  height: 35px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+}
+
+.a-no-decoration{
+  text-decoration: none;
+}
+
+a:hover{
+  text-decoration: none!important;
+}
+
+//Offer
+
+.offer-box{
+  min-height: 100vh;
+  min-width: 100%;
+  background-color: #fff;
+  border-top: 2px solid #e3001b;
+}
+
+.white-dots {
+  z-index: 999999;
+  margin-bottom: 30px;
+  background-color: #fff;
+}
+
+.white-dots li button:before{
+  font-size: 20px!important;
+}
+.white-dots li button{
+  font-size: 20px!important;
+}
+
+.white-dots li {
+  width: 30px!important;
+}
+
+.slider-image{
+  position: absolute;
+  bottom: 130px;
+  right: 130px;
+}
+.slick-next:before, .slick-prev:before {
+  font-size: 20px;
+  line-height: 1;
+  color: #e3001b;
+}
+
+@media (max-width: 768px) {
+  .slider-image{
+    position: relative!important;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    padding-top: 100px;
+  }
+}
+
+.contact{
+  width: 100%;
+  background-color: #e3001b;
+  margin: 0;
+  padding: 20px 0 20px 0;
+  height: auto;
+  position: relative;
+  color: #fff;
+}
+
+@media (min-width: 1750px) {
+  .contact{
+    margin: 40px 0 0 0;
+    position: fixed;
+    width: 300px;
+    right: 0;
+    top: 80px;
+  }
+}

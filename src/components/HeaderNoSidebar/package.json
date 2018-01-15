@@ -1,0 +1,6 @@
+{
+  "name": "HeaderNoSidebar",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./HeaderNoSidebar.js"
+}

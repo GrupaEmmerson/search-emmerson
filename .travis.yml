@@ -1,0 +1,19 @@
+sudo: required
+dist: trusty
+language: node_js
+node_js:
+  - "8"
+install:
+    - npm install
+    - npm run build
+deploy:
+  provider: gcs
+  access_key_id: $GCS_ACCESS_KEY
+  secret_access_key: $GCS_SECRET_KEY
+  bucket: $GCS_BUCKET_NAME
+  on:
+    repo: GrupaEmmerson/website-emmerson
+  skip_cleanup: true
+  acl: public-read
+  cache_control: "max-age=60"
+  local-dir: build
