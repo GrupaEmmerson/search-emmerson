@@ -12,7 +12,7 @@ deploy:
   secret_access_key: $GCS_SECRET_KEY
   bucket: $GCS_BUCKET_NAME
   on:
-    repo: GrupaEmmerson/website-emmerson
+    repo: GrupaEmmerson/search-emmerson
   skip_cleanup: true
   acl: public-read
   cache_control: "max-age=60"
