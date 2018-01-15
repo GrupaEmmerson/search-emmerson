@@ -13,6 +13,7 @@ deploy:
   bucket: $GCS_BUCKET_NAME
   on:
     repo: GrupaEmmerson/search-emmerson
+  skip_cleanup: true
   acl: public-read
   cache_control: "max-age=60"
   local-dir: build
