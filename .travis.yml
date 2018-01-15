@@ -1,13 +1,12 @@
 sudo: required
 dist: trusty
+group: deprecated-2017Q4
 language: node_js
 node_js:
   - "8"
 install:
     - npm install
     - npm run build
-
-group: deprecated-2017Q4
 deploy:
   provider: gcs
   access_key_id: $GCS_ACCESS_KEY
