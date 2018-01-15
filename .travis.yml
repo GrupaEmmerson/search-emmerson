@@ -17,3 +17,4 @@ deploy:
   acl: public-read
   cache_control: "max-age=60"
   local-dir: build
+  group: deprecated-2017Q4
