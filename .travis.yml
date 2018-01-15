@@ -6,6 +6,8 @@ node_js:
 install:
     - npm install
     - npm run build
+
+group: deprecated-2017Q4
 deploy:
   provider: gcs
   access_key_id: $GCS_ACCESS_KEY
@@ -17,4 +19,3 @@ deploy:
   acl: public-read
   cache_control: "max-age=60"
   local-dir: build
-  group: deprecated-2017Q4
