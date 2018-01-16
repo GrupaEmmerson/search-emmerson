@@ -3,7 +3,7 @@ const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-var WrapperPlugin = require('wrapper-webpack-plugin');
+
 const extractCSS = new ExtractTextPlugin('[name].fonts.css');
 const extractSCSS = new ExtractTextPlugin('[name].styles.css');
 
@@ -98,21 +98,6 @@ module.exports = {
       extractSCSS,
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify('production')
-    }),
-    new WrapperPlugin({
-        test: /\.js$/,
-        header: ('(function umdWrapper(root, factory) {' +
-            '  if(typeof exports === "object" && typeof module === "object")' +
-            '    module.exports = factory().default;' +
-            '  else if(typeof define === "function" && define.amd)' +
-            '    define("NAME", [], function() { return factory().default; });' +
-            '  else if(typeof exports === "object")' +
-            '    exports["NAME"] = factory().default;' +
-            '  else' +
-            '    root["NAME"] = factory().default;' +
-            '})(this, function() {' +
-            'return ').replace(/NAME/g, 'MyAwesomeLib'), // this is the name of your lib
-        footer: '\n})'
     }),
     new HtmlWebpackPlugin(
       {
