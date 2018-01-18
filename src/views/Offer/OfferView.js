@@ -69,15 +69,14 @@ class OfferView extends Component {
                             <Contact adviser={this.state.offer.adviser}/>
                         </div>
                         <div className='offer-box col-12 col-sm-12 col-md-12 col-lg-12 row nopadding' style={{marginTop: 50+'px'}}>
-                            <div className='col-12' style={{ marginTop: 20+'px'}}>
 
-                            </div>
                             <div className='col-12 col-sm-12 col-md-12'>
                                 <div style={{borderBottom: '1px solid #e3001b', color: '#fff', margin: 0, padding: 0, fontSize: 14+'px', marginTop: 20+'px'}}>
                                     <div style={{backgroundColor: '#e3001b', padding: 4+'px'}} className='col-3'>Galeria:</div>
                                 </div>
                                 <SimpleSlider images={this.state.offer.photo}/>
                             </div>
+
                             <div className='col-12 col-sm-12 col-md-3'>
                                 <InfoOfferView offer={this.state.offer}/>
                             </div>
@@ -88,9 +87,20 @@ class OfferView extends Component {
                                 </div>
                                 <div dangerouslySetInnerHTML={{ __html: this.state.offer.description }} style={{marginTop: 40+'px', marginBottom: 40+'px'}}/>
 
+                                <div style={{borderBottom: '1px solid #e3001b', color: '#fff', margin: 0, padding: 0, fontSize: 14+'px', marginTop: 20+'px'}}>
+                                    <div style={{backgroundColor: '#e3001b', padding: 4+'px'}} className='col-3'>Udostępnij:</div>
+                                </div>
+                                <div className="col-12 row nopadding">
+                                    <button className="btn btn-lg btn-facebook col-12 col-sm-6 col-md-6 col-lg-3" style={{marginTop: 10+'px'}}><span> Facebook</span></button>
+                                    <button className="btn btn-lg btn-google-plus col-12 col-sm-6 col-md-6 col-lg-3" style={{marginTop: 10+'px'}}><span> Google+</span></button>
+                                    <button className="btn btn-lg btn-twitter col-12 col-sm-6 col-md-6 col-lg-3" style={{marginTop: 10+'px'}}><span> Twitter</span></button>
+                                    <button className="btn btn-lg btn-pinterest text col-12 col-sm-6 col-md-6 col-lg-3" style={{marginTop: 10+'px'}}><i className="fa fa-file-pdf-o"></i>&nbsp;Zapisz do PDF</button>
+                                </div>
+
                                 <div style={{borderBottom: '1px solid #e3001b', color: '#fff', margin: 0, padding: 0, fontSize: 14+'px', marginTop: 40+'px'}}>
                                     <div style={{backgroundColor: '#e3001b', padding: 4+'px'}} className='col-3'>Mapa:</div>
                                 </div>
+
                                 <div style={{margin: 0, padding: 0}}>
                                     <MapOfferContainer markerLocation={{lat: parseFloat(this.state.offer.latitude), lng: parseFloat(this.state.offer.longitude)}} markerIco={this.state.offer.ico}/>
                                 </div>

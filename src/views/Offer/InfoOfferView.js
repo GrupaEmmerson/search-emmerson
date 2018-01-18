@@ -24,95 +24,93 @@ class InfoOfferView extends Component {
         testWeakMap.set(this, value);
     }
 
+    renderField([key,value]){
+        console.log(
+            key.toString(), value.toString()
+        );
+        return(
+            <div key={key} className='row col-12 nopadding' style={{color: '#000'}}>
+                <div className="col-6 nopadding">{key.toString()}:</div>
+                <div className="col-6 nopadding">
+                    <div className="float-right">{value.toString()}</div>
+                </div>
+            </div>
+        );
+    }
+
+    renderFields(array){
+
+        return(
+            Object.entries(array).map(this.renderField.bind(this))
+        );
+    }
 
     render() {
         const { offer } = this.props;
         return(
           <div>
-              <div style={{borderBottom: '1px solid #e3001b', color: '#fff', margin: 0, padding: 0, fontSize: 14+'px', marginTop: 40+'px'}}>
-                  <div style={{backgroundColor: '#e3001b', padding: 4+'px'}} className='col-9'>Informacje Podstawowe:</div>
-              </div>
-              <div className='row align-items-end'>
-                  <div className="col-6">
-                      Powierzchnia całkowita:
-                  </div>
-                  <div className="col-6">
-                      <div className="float-right">
-                          <NumberFormat value={parseFloat(offer.surface)}
-                                        displayType={'text'}
-                                        thousandSeparator={' '}
-                                        decimalSeparator={','}
-                                        decimalScale={2}
-                                        fixedDecimalScale={true}
-                          /> m<sup>2</sup>
+
+              {offer.feature.map((attribute, index) => {
+                  /**
+                   * Aby działały rzuty nazwa pola musi być taka sama jak pole atrybutu.
+                   */
+                  if(attribute.name === 'Rzut')
+                  {
+                      return(
+                          <div key={index}>
+                              <div style={{borderBottom: '1px solid #e3001b', color: '#fff', margin: 0, padding: 0, fontSize: 14+'px', marginTop: 40+'px'}}>
+                                  <div key={attribute.name} style={{backgroundColor: '#e3001b', padding: 4+'px'}} className='col-9'>{attribute.name}:</div>
+                              </div>
+                              {
+                                  attribute.value.map(array => {
+                                      return(
+                                          <div>
+                                              <img src={array.floorPlan[0].link} style={{width: 100+'%',
+                                                  cursor: 'pointer'}} onClick={()=>this.setState({ isOpen: true, photoIndex: 0 })}/>
+                                              {this.state.isOpen && (
+                                                  <Lightbox
+                                                      mainSrc={array.floorPlan[this.state.photoIndex].link}
+                                                      nextSrc={array.floorPlan[(this.state.photoIndex + 1) % array.floorPlan.length].link}
+                                                      prevSrc={array.floorPlan[(this.state.photoIndex + array.floorPlan.length - 1) % array.floorPlan.length].link}
+                                                      onCloseRequest={() => this.setState({ isOpen: false })}
+                                                      onMovePrevRequest={() =>
+                                                          this.setState({
+                                                              photoIndex: (this.state.photoIndex + array.floorPlan.length - 1) % array.floorPlan.length,
+                                                          })
+                                                      }
+                                                      onMoveNextRequest={() =>
+                                                          this.setState({
+                                                              photoIndex: (this.state.photoIndex + 1) % array.floorPlan.length,
+                                                          })
+                                                      }
+                                                  />
+                                              )}
+                                          </div>
+                                      )
+                                  })
+                              }
+                          </div>
+                      )
+                  }
+                  return(
+                      <div key={index}>
+                          <div style={{borderBottom: '1px solid #e3001b', color: '#fff', margin: 0, padding: 0, fontSize: 14+'px', marginTop: 40+'px'}}>
+                              <div key={attribute.name} style={{backgroundColor: '#e3001b', padding: 4+'px'}} className='col-9'>{attribute.name}:</div>
+                          </div>
+                          {
+                              attribute.value.map(array => {
+                                  return(
+                                      <div className='nopadding'>
+                                          {
+                                              this.renderFields(array)
+                                          }
+                                      </div>
+                                  )
+                              })
+                          }
                       </div>
-                  </div>
-                  <div className="col-6">
-                      Liczba pokoi:
-                  </div>
-                  <div className="col-6">
-                      <div className="float-right">{offer.number_of_rooms}</div>
-                  </div>
-                  <div className="col-6">
-                      Piętro:
-                  </div>
-                  <div className="col-6">
-                      <div className="float-right">{offer.floor}</div>
-                  </div>
-                  <div className="col-6">
-                      Ilość pięter:
-                  </div>
-                  <div className="col-6">
-                      <div className="float-right">{offer.number_of_floors}</div>
-                  </div>
-                  <div className="col-6">
-                      Rok budowy:
-                  </div>
-                  <div className="col-6">
-                      <div className="float-right">{offer.year_of_construction}</div>
-                  </div>
-                  <div className="col-6">
-                      Numer oferty:
-                  </div>
-                  <div className="col-6">
-                      <div className="float-right">{offer.number}</div>
-                  </div>
-              </div>
-              <div style={{borderBottom: '1px solid #e3001b', color: '#fff', margin: 0, padding: 0, fontSize: 14+'px', marginTop: 40+'px'}}>
-                  <div style={{backgroundColor: '#e3001b', padding: 4+'px'}} className='col-9'>Rzut:</div>
-              </div>
-              <div  className='col-12'>
-                  <img src={offer.floor_plan} style={{width: 100+'%', cursor: 'pointer'}} onClick={()=>this.setState({ isOpen: true, photoIndex: 0 })}/>
-                  {this.state.isOpen && (
-                      <Lightbox
-                          mainSrc={ offer.floor_plan }
-                          onCloseRequest={() => this.setState({ isOpen: false })}
-                      />
                   )}
-              </div>
-              <div style={{borderBottom: '1px solid #e3001b', color: '#fff', margin: 0, padding: 0, fontSize: 14+'px', marginTop: 40+'px'}}>
-                  <div style={{backgroundColor: '#e3001b', padding: 4+'px'}} className='col-9'>Informacje Dodatkowe:</div>
-              </div>
-              <div  className='row align-items-end'>
-                  <div className="col-6">Rozkład:</div><div className="col-6"><div className="float-right">1</div></div>
-                  <div className="col-6">Dozór budynku:</div><div className="col-6"><div className="float-right">2</div></div>
-                  <div className="col-6">Głośność:</div><div className="col-6"><div className="float-right">3</div></div>
-                  <div className="col-6">Dojazd:</div><div className="col-6"><div className="float-right">4</div></div>
-                  <div className="col-6">Internet:</div><div className="col-6"><div className="float-right">5</div></div>
-                  <div className="col-6">Ogrzewanie:</div><div className="col-6"><div className="float-right">6</div></div>
-                  <div className="col-6">Telewizja kablowa:</div><div className="col-6"><div className="float-right">7</div></div>
-                  <div className="col-6">Balkon:</div><div className="col-6"><div className="float-right">8</div></div>
-                  <div className="col-6">Winda:</div><div className="col-6"><div className="float-right">9</div></div>
-                  <div className="col-6">Usytuowanie:</div><div className="col-6"><div className="float-right">10</div></div>
-                  <div className="col-6">Okna:</div><div className="col-6"><div className="float-right">11</div></div>
-                  <div className="col-6">Instalacje:</div><div className="col-6"><div className="float-right">12</div></div>
-                  <div className="col-6">Wysokość pomieszczeń:</div><div className="col-6"><div className="float-right">13</div></div>
-                  <div className="col-6">Ilość wind:</div><div className="col-6"><div className="float-right">14</div></div>
-                  <div className="col-6">Stan lokalu:</div><div className="col-6"><div className="float-right">15</div></div>
-                  <div className="col-6">Rodzaj mieszkania:</div><div className="col-6"><div className="float-right">16</div></div>
-                  <div className="col-6">Gaz:</div><div className="col-6"><div className="float-right">17</div></div>
-                  <div className="col-6">Woda:</div><div className="col-6"><div className="float-right">18</div></div>
-              </div>
+              )}
           </div>
         );
     }

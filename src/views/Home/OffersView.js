@@ -78,7 +78,7 @@ class OffersView extends Component {
                                                     <h4>Miasto <b>{e.city}</b></h4>
                                                 </div>
                                                 <div className='col-md-6  col-sm-6 col-6'>
-                                                    <h4>Oferta <b>{e.for_rent !== true ? 'Kupna' : 'Wynajmu' }</b></h4>
+                                                    <h4>Na <b>{e.for_rent !== true ? 'Sprzedaż' : 'Wynajem' }</b></h4>
                                                 </div>
                                                 <div className='col-md-6 col-sm-6 col-6'>
                                                     Nr. Oferty: <b>{e.number}</b><br/>

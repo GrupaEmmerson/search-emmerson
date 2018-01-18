@@ -58,7 +58,6 @@ class SimpleSlider extends React.Component {
             <div className='col-12 col-sm-12 col-md-12 col-lg-12' >
                 <Slider {...settings}>
                     {images.map((e, index) => {
-                        console.log(index);
                         return(
                             <img
                                 src={e.link}
