@@ -28,7 +28,6 @@ export const MapOfferContainer = compose(
             }
         }
     >
-        {console.log(props.markerLocation)}
         <Marker position={props.markerLocation} icon={'./img/'+props.markerIco}/>
     </GoogleMap>
 );

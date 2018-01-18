@@ -25,9 +25,6 @@ class InfoOfferView extends Component {
     }
 
     renderField([key,value]){
-        console.log(
-            key.toString(), value.toString()
-        );
         return(
             <div key={key} className='row col-12 nopadding' style={{color: '#000'}}>
                 <div className="col-6 nopadding">{key.toString()}:</div>

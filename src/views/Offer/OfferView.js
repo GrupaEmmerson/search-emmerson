@@ -50,7 +50,6 @@ class OfferView extends Component {
                 </div>
             )
         }
-        console.log(this.state.offer);
         return (
             <div className="container">
                 <div className='row'>
