@@ -26,15 +26,15 @@ class Contact extends Component {
         const { adviser } = this.props;
         return (
             <div className="container-fluid nopadding" >
-                <div className="col-md-12 ">
-                    <div className="col-md-12 nopadding">
+                <div className="row nopadding">
+                    <div className="col-xl-12 col-lg-4 col-md-5 col-sm-12">
                         <form>
                             <legend><span className="fa fa-envelope"></span> Kontakt:</legend>
                             <div className='row'>
-                                <div className='col-5'>
+                                <div className='col-5 col-sm-5 col-md-5 col-lg-5'>
                                     <img src={adviser.photo} style={{width: 100+'px'}}/>
                                 </div>
-                                <div className='col-7'>
+                                <div className='col-7 col-sm-7 col-md-7 col-lg-7'>
                                     <address>
                                         <strong>{adviser.name}</strong><br/>
                                         <strong>+48 {adviser.cell_phone}</strong><br/>
@@ -44,14 +44,14 @@ class Contact extends Component {
                                     </address>
                                 </div>
                                 <div className='col-12'>
-                                    <br/>
+                                    <strong>{ adviser.job_title.toString() }</strong><br/>
                                     <a style={{color:'#fff'}} href={adviser.email}>{adviser.email}</a>
                                     <br/><br/>
                                 </div>
                             </div>
                         </form>
                     </div>
-                    <div className="well well-sm ">
+                    <div className="well well-sm col-xl-12 col-lg-8 col-md-7 col-sm-12">
                         <form>
                             <div className="row">
                                 <div className="col-md-12">
