@@ -16,7 +16,7 @@ class OfferView extends Component {
         super(props);
         this.state = {
             offer: null,
-            baseUrl: location.protocol + '//' + location.host
+            baseUrl: 'http://test.draftway.pl'
         };
 
     }
@@ -38,12 +38,48 @@ class OfferView extends Component {
                 .then(res => res.json())
                 .then(response => {
                     this.setState({offer: response});
+                    this.facebookShare();
                 });
-    }
 
+        // Load the SDK asynchronously
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v2.11&appId=1537301123055501';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+
+    }
+    facebookShare(){
+        //
+        // const share_url = 'https://www.facebook.com/dialog/feed?';
+        // const app_id = 1537301123055501;
+        const link = this.state.baseUrl + '/#/offer/' + this.props.match.params.id;
+        const picture = this.state.offer.photo[0].link;
+        const name = 'Emmerson Realty S.A.';
+        const caption = 'Emmerson Realty S.A.';
+        const description =  '';
+        const redirect_uri = link;
+
+        document.getElementById('shareBtn').onclick = function() { FB.ui({
+            method: 'share',
+            mobile_iframe: true,
+            href: link,
+            picture: picture,
+            name: name,
+            caption: caption,
+            description: description,
+            redirect_uri: redirect_uri
+        }, function(response){});
+        };
+
+        console.log(url);
+        this.setState({facebook: url})
+    }
     render() {
 
-        console.log(this.state.offer);
         if(!this.state.offer){
             return (
                 <div className='vertical-center'>
@@ -66,9 +102,11 @@ class OfferView extends Component {
                                 type_of_contract={this.state.offer.type_of_contract}
                             />
                         </div>
+
                         <div className='contact'>
                             <Contact adviser={this.state.offer.adviser}/>
                         </div>
+
                         <div className='offer-box col-12 col-sm-12 col-md-12 col-lg-12 row nopadding' style={{marginTop: 50+'px'}} >
 
                             <div className='col-12 col-sm-12 col-md-12'>
@@ -81,18 +119,24 @@ class OfferView extends Component {
                             <div className='col-12 col-sm-12 col-md-5 col-lg-3' style={{marginBottom: 40+'px'}}>
                                 <InfoOfferView offer={this.state.offer}/>
                             </div>
+
                             <div className='col-12 col-sm-12 col-md-7 col-lg-9' style={{marginBottom: 40+'px'}}>
 
                                 <div style={{borderBottom: '1px solid #e3001b', color: '#fff', margin: 0, padding: 0, fontSize: 14+'px', marginTop: 40+'px'}}>
                                     <div style={{backgroundColor: '#e3001b', padding: 4+'px'}} className='col-3'>Opis:</div>
                                 </div>
+
                                 <div dangerouslySetInnerHTML={{ __html: this.state.offer.description }} style={{marginTop: 40+'px', marginBottom: 40+'px'}}/>
 
                                 <div style={{borderBottom: '1px solid #e3001b', color: '#fff', margin: 0, padding: 0, fontSize: 14+'px', marginTop: 20+'px'}}>
                                     <div style={{backgroundColor: '#e3001b', padding: 4+'px'}} className='col-3'>Udostępnij:</div>
                                 </div>
+
                                 <div className="col-12 row nopadding">
-                                    <button className="btn btn-lg btn-facebook col-12 col-sm-6 col-md-6 col-lg-3" style={{marginTop: 10+'px'}}><span> Facebook</span></button>
+                                    <div id="fb-root"></div>
+                                            <button id='shareBtn' className="btn btn-lg btn-facebook col-12 col-sm-6 col-md-6 col-lg-3" style={{marginTop: 10+'px'}}>
+                                                <span> Facebook</span>
+                                            </button>
                                     <button className="btn btn-lg btn-google-plus col-12 col-sm-6 col-md-6 col-lg-3" style={{marginTop: 10+'px'}}><span> Google+</span></button>
                                     <button className="btn btn-lg btn-twitter col-12 col-sm-6 col-md-6 col-lg-3" style={{marginTop: 10+'px'}}><span> Twitter</span></button>
                                     <button className="btn btn-lg btn-pinterest text col-12 col-sm-6 col-md-6 col-lg-3" style={{marginTop: 10+'px'}}><i className="fa fa-file-pdf-o"></i>&nbsp;Zapisz do PDF</button>
