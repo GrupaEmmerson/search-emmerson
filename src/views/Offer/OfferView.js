@@ -15,7 +15,8 @@ class OfferView extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            offer: null
+            offer: null,
+            baseUrl: location.protocol + '//' + location.host
         };
 
     }
@@ -42,6 +43,7 @@ class OfferView extends Component {
 
     render() {
 
+        console.log(this.state.offer);
         if(!this.state.offer){
             return (
                 <div className='vertical-center'>
@@ -53,7 +55,7 @@ class OfferView extends Component {
         return (
             <div className="container">
                 <div className='row'>
-                    <div className='col-12 col-sm-12 col-md-12 col-lg-12' style={{backgroundColor: '#151b1e', margin: 0, padding: 0}}>
+                    <div className='col-12 col-sm-12 col-md-12 col-lg-12' style={{backgroundColor: '#151b1e', margin: 0, padding: 0}} >
                         <div className='col-12 nopadding' style={{marginBottom: 25+'px'}}>
                             <HeaderOffer
                                 headerPhoto={this.state.offer.photo[0]}
@@ -67,7 +69,7 @@ class OfferView extends Component {
                         <div className='contact'>
                             <Contact adviser={this.state.offer.adviser}/>
                         </div>
-                        <div className='offer-box col-12 col-sm-12 col-md-12 col-lg-12 row nopadding' style={{marginTop: 50+'px'}}>
+                        <div className='offer-box col-12 col-sm-12 col-md-12 col-lg-12 row nopadding' style={{marginTop: 50+'px'}} >
 
                             <div className='col-12 col-sm-12 col-md-12'>
                                 <div style={{borderBottom: '1px solid #e3001b', color: '#fff', margin: 0, padding: 0, fontSize: 14+'px', marginTop: 20+'px'}}>
@@ -76,10 +78,10 @@ class OfferView extends Component {
                                 <SimpleSlider images={this.state.offer.photo}/>
                             </div>
 
-                            <div className='col-12 col-sm-12 col-md-3'>
+                            <div className='col-12 col-sm-12 col-md-5 col-lg-3' style={{marginBottom: 40+'px'}}>
                                 <InfoOfferView offer={this.state.offer}/>
                             </div>
-                            <div className='col-12 col-sm-12 col-md-9' style={{marginBottom: 40+'px'}}>
+                            <div className='col-12 col-sm-12 col-md-7 col-lg-9' style={{marginBottom: 40+'px'}}>
 
                                 <div style={{borderBottom: '1px solid #e3001b', color: '#fff', margin: 0, padding: 0, fontSize: 14+'px', marginTop: 40+'px'}}>
                                     <div style={{backgroundColor: '#e3001b', padding: 4+'px'}} className='col-3'>Opis:</div>
@@ -103,7 +105,6 @@ class OfferView extends Component {
                                 <div style={{margin: 0, padding: 0}}>
                                     <MapOfferContainer markerLocation={{lat: parseFloat(this.state.offer.latitude), lng: parseFloat(this.state.offer.longitude)}} markerIco={this.state.offer.ico}/>
                                 </div>
-
                             </div>
                         </div>
                     </div>

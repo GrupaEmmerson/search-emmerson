@@ -37,10 +37,10 @@ class Contact extends Component {
                                 <div className='col-7'>
                                     <address>
                                         <strong>{adviser.name}</strong><br/>
-                                        Stawki 40<br/>
-                                        01-040 Warszawa<br/>
-                                        +48 {adviser.cell_phone}<br/>
-                                        {adviser.phone ? adviser.phone : ''}
+                                        <strong>+48 {adviser.cell_phone}</strong><br/>
+                                        {adviser.phone ? adviser.phone : ''}<br/><br/>
+                                        {adviser.branch.address}<br/>
+                                        {adviser.branch.postal} {adviser.branch.town}<br/>
                                     </address>
                                 </div>
                                 <div className='col-12'>
