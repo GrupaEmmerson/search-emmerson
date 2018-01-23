@@ -7,6 +7,7 @@ import Contact from './Contact';
 import { MapOfferContainer } from './MapOfferContainer';
 import InfoOfferView from  './InfoOfferView';
 import HeaderOffer from "./HeaderOffer";
+import MetaTags from 'react-meta-tags';
 
 let testWeakMap = new WeakMap();
 
@@ -16,7 +17,12 @@ class OfferView extends Component {
         super(props);
         this.state = {
             offer: null,
-            baseUrl: 'http://test.draftway.pl'
+            baseUrl: 'http://test.draftway.pl',
+            link : 'http://test.draftway.pl/#/offer/' + this.props.match.params.id,
+            name : 'Emmerson Realty S.A.',
+            caption : 'Emmerson Realty S.A',
+            description :  '-',
+            redirect_uri : 'http://test.draftway.pl/#/offer/' + this.props.match.params.id,
         };
 
     }
@@ -38,46 +44,85 @@ class OfferView extends Component {
                 .then(res => res.json())
                 .then(response => {
                     this.setState({offer: response});
+                    this.setState({
+                        picture: 'https://cdn31.draftway.pl/virgofotoresizer.ashx?wym=1200_1200&id=5334657',
+                        description: this.state.offer.description.replace(/<\/?[^>]+(>|$)/g, "").substring(0,247) + '...'
+                    });
                     this.facebookShare();
                 });
 
-        // Load the SDK asynchronously
-        (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = 'https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v2.11&appId=1537301123055501';
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-
-
-    }
-    facebookShare(){
-        //
-        // const share_url = 'https://www.facebook.com/dialog/feed?';
-        // const app_id = 1537301123055501;
-        const link = this.state.baseUrl + '/#/offer/' + this.props.match.params.id;
-        const picture = this.state.offer.photo[0].link;
-        const name = 'Emmerson Realty S.A.';
-        const caption = 'Emmerson Realty S.A.';
-        const description =  '';
-        const redirect_uri = link;
-
-        document.getElementById('shareBtn').onclick = function() { FB.ui({
-            method: 'share',
-            mobile_iframe: true,
-            href: link,
-            picture: picture,
-            name: name,
-            caption: caption,
-            description: description,
-            redirect_uri: redirect_uri
-        }, function(response){});
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '1537301123055501',
+                xfbml      : true,
+                version    : 'v2.11'
+            });
+            FB.AppEvents.logPageView();
         };
 
-        console.log(url);
-        this.setState({facebook: url})
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v2.8";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
     }
+    metaRender(){
+        if(this.state.picture)
+            return(
+                <MetaTags>
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+                    <meta property="fb:app_id" content="1537301123055501"/>
+                </MetaTags>
+            );
+    }
+
+    facebookShare(){
+
+        const link = this.state.link;
+        const picture = this.state.picture;
+        const name = this.state.name;
+        const caption = this.state.caption;
+        const description = this.state.description;
+        const redirect_uri = this.state.redirect_uri;
+
+        document.getElementById('shareBtn').onclick = function() {
+            FB.ui({
+                method: 'share_open_graph',
+                action_type: 'og.shares',
+                display: 'popup',
+                type: 'large',
+                action_properties: JSON.stringify({
+                    object: {
+                        'og:url': link,
+                        'og:title': name,
+                        'og:caption': caption,
+                        'og:description': description,
+                        'og:redirect_uri': redirect_uri,
+                        'og:image': picture,
+                        'og:image:width':  1200,
+                        'og:image:height': 628
+                    }
+                })
+            }, function(response) {
+                // Action after response
+            });
+            console.log(JSON.stringify({
+                object: {
+                    'og:url': link,
+                    'og:title': name,
+                    'og:caption': name,
+                    'og:description': description,
+                    'og:image': picture,
+                    'og:image:width':  1200,
+                    'og:image:height': 628
+                }
+            }))
+        };
+
+    }
+
     render() {
 
         if(!this.state.offer){
@@ -134,9 +179,9 @@ class OfferView extends Component {
 
                                 <div className="col-12 row nopadding">
                                     <div id="fb-root"></div>
-                                            <button id='shareBtn' className="btn btn-lg btn-facebook col-12 col-sm-6 col-md-6 col-lg-3" style={{marginTop: 10+'px'}}>
-                                                <span> Facebook</span>
-                                            </button>
+                                        <button id='shareBtn' data-href={this.state.link} data-layout="button" className="btn btn-lg btn-facebook col-12 col-sm-6 col-md-6 col-lg-3 fb-share-button" style={{marginTop: 10+'px'}}>
+                                            <span> Facebook</span>
+                                        </button>
                                     <button className="btn btn-lg btn-google-plus col-12 col-sm-6 col-md-6 col-lg-3" style={{marginTop: 10+'px'}}><span> Google+</span></button>
                                     <button className="btn btn-lg btn-twitter col-12 col-sm-6 col-md-6 col-lg-3" style={{marginTop: 10+'px'}}><span> Twitter</span></button>
                                     <button className="btn btn-lg btn-pinterest text col-12 col-sm-6 col-md-6 col-lg-3" style={{marginTop: 10+'px'}}><i className="fa fa-file-pdf-o"></i>&nbsp;Zapisz do PDF</button>
@@ -153,6 +198,10 @@ class OfferView extends Component {
                         </div>
                     </div>
                 </div>
+                {
+                    this.metaRender()
+                }
+
             </div>
         )
     }
