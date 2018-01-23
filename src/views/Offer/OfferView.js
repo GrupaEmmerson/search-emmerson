@@ -73,6 +73,12 @@ class OfferView extends Component {
             return(
                 <MetaTags>
                     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+                    <meta property="og:title" content={this.state.offer.full_location}/>
+                    <meta property="og:description" content={this.state.description}/>
+                    <meta property="og:type" content="website"/>
+                    <meta property="og:url" content={this.state.link}/>
+                    <meta property="og:site_name" content="www.emmerson.pl"/>
+                    <meta property="og:image" content={this.state.picture}/>
                     <meta property="fb:app_id" content="1537301123055501"/>
                 </MetaTags>
             );
@@ -86,40 +92,12 @@ class OfferView extends Component {
         const caption = this.state.caption;
         const description = this.state.description;
         const redirect_uri = this.state.redirect_uri;
+        this.setState({
+            facebook: 'https://www.facebook.com/dialog/feed?app_id=1537301123055501&link='+  encodeURIComponent(link) + '&picture=' +  encodeURIComponent(picture)
+        });
 
-        document.getElementById('shareBtn').onclick = function() {
-            FB.ui({
-                method: 'share_open_graph',
-                action_type: 'og.shares',
-                display: 'popup',
-                type: 'large',
-                action_properties: JSON.stringify({
-                    object: {
-                        'og:url': link,
-                        'og:title': name,
-                        'og:caption': caption,
-                        'og:description': description,
-                        'og:redirect_uri': redirect_uri,
-                        'og:image': picture,
-                        'og:image:width':  1200,
-                        'og:image:height': 628
-                    }
-                })
-            }, function(response) {
-            });
-            console.log(JSON.stringify({
-                object: {
-                    'og:url': link,
-                    'og:title': name,
-                    'og:caption': name,
-                    'og:description': description,
-                    'og:image': picture,
-                    'og:image:width':  1200,
-                    'og:image:height': 628
-                }
-            }))
-        };
 
+        console.log(this.state.facebook)
     }
 
     render() {
@@ -178,9 +156,11 @@ class OfferView extends Component {
 
                                 <div className="col-12 row nopadding">
                                     <div id="fb-root"></div>
-                                        <button id='shareBtn' data-href={this.state.link} data-layout="button" className="btn btn-lg btn-facebook col-12 col-sm-6 col-md-6 col-lg-3 fb-share-button" style={{marginTop: 10+'px'}}>
+                                    <a href={this.state.facebook} target='_blank'>
+                                        <button className="btn btn-lg btn-facebook col-12 col-sm-6 col-md-6 col-lg-3 fb-share-button" style={{marginTop: 10+'px'}}>
                                             <span> Facebook</span>
                                         </button>
+                                    </a>
                                     <button className="btn btn-lg btn-google-plus col-12 col-sm-6 col-md-6 col-lg-3" style={{marginTop: 10+'px'}}><span> Google+</span></button>
                                     <button className="btn btn-lg btn-twitter col-12 col-sm-6 col-md-6 col-lg-3" style={{marginTop: 10+'px'}}><span> Twitter</span></button>
                                     <button className="btn btn-lg btn-pinterest text col-12 col-sm-6 col-md-6 col-lg-3" style={{marginTop: 10+'px'}}><i className="fa fa-file-pdf-o"></i>&nbsp;Zapisz do PDF</button>
