@@ -106,7 +106,6 @@ class OfferView extends Component {
                     }
                 })
             }, function(response) {
-                // Action after response
             });
             console.log(JSON.stringify({
                 object: {
