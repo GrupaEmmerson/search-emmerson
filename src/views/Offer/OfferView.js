@@ -44,7 +44,8 @@ class OfferView extends Component {
             .then(response => {
                 this.setState({offer: response});
                 this.setState({
-                    picture: this.state.offer.photo[0].link,
+                    // picture: this.state.offer.photo[0].link,
+                    picture: 'http:test.draftway.pl/img/26-googleplusreviews.jpg',
                     description: this.state.offer.description.replace(/<\/?[^>]+(>|$)/g, "").substring(0,247) + '...'
                 });
                 this.facebookShare();
