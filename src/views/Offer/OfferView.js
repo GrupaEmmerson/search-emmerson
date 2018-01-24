@@ -93,7 +93,7 @@ class OfferView extends Component {
                         'og:redirect_uri': redirect_uri,
                         'og:image': picture,
                         'og:image:width': 1200,
-                        'og:image:height': 628
+                        'og:image:height': 622
                     }
                 })
             }, function(response) {
