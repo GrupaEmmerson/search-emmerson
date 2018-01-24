@@ -7,6 +7,7 @@ import Contact from './Contact';
 import { MapOfferContainer } from './MapOfferContainer';
 import InfoOfferView from  './InfoOfferView';
 import HeaderOffer from "./HeaderOffer";
+import { FacebookButton } from "react-social";
 
 let testWeakMap = new WeakMap();
 
@@ -22,6 +23,7 @@ class OfferView extends Component {
             caption : 'Emmerson Realty S.A',
             description :  '-',
             redirect_uri : 'http://test.draftway.pl/#/offer/' + this.props.match.params.id,
+            appId: 1537301123055501
         };
 
     }
@@ -158,9 +160,9 @@ class OfferView extends Component {
 
                                 <div className="col-12 row nopadding">
                                     <div id="fb-root"></div>
-                                    <button id='shareBtn' className="btn btn-lg btn-facebook col-12 col-sm-6 col-md-6 col-lg-3 fb-share-button" style={{marginTop: 10+'px'}}>
+                                    <FacebookButton id='shareBtn' url={this.state.link} appId={this.state.appId} media={this.state.picture} className="btn btn-lg btn-facebook col-12 col-sm-6 col-md-6 col-lg-3 fb-share-button" style={{marginTop: 10+'px'}}>
                                         <span> Facebook</span>
-                                    </button>
+                                    </FacebookButton>
                                     <button className="btn btn-lg btn-google-plus col-12 col-sm-6 col-md-6 col-lg-3" style={{marginTop: 10+'px'}}><span> Google+</span></button>
                                     <button className="btn btn-lg btn-twitter col-12 col-sm-6 col-md-6 col-lg-3" style={{marginTop: 10+'px'}}><span> Twitter</span></button>
                                     <button className="btn btn-lg btn-pinterest text col-12 col-sm-6 col-md-6 col-lg-3" style={{marginTop: 10+'px'}}><i className="fa fa-file-pdf-o"></i>&nbsp;Zapisz do PDF</button>
