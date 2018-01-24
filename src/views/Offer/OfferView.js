@@ -73,11 +73,31 @@ class OfferView extends Component {
 
         const link = this.state.link;
         const picture = this.state.picture;
-        this.setState({
-            facebook: 'https://www.facebook.com/dialog/feed?app_id=1537301123055501&link='+  encodeURIComponent(link) + '&picture=' +  encodeURIComponent(picture)
-        });
+        const name = this.state.name;
+        const caption = this.state.caption;
+        const description = this.state.description;
+        const redirect_uri = this.state.redirect_uri;
 
-        console.log(this.state.facebook)
+        document.getElementById('shareBtn').onclick = function() {
+            FB.ui({
+                method: 'share_open_graph',
+                action_type: 'og.shares',
+                display: 'popup',
+                type: 'large',
+                action_properties: JSON.stringify({
+                    object: {
+                        'og:url': link,
+                        'og:title': name,
+                        'og:caption': caption,
+                        'og:description': description,
+                        'og:redirect_uri': redirect_uri,
+                        'og:image': picture
+                    }
+                })
+            }, function(response) {
+                // Action after response
+            });
+        }
     }
 
     render() {
@@ -145,11 +165,9 @@ class OfferView extends Component {
 
                                 <div className="col-12 row nopadding">
                                     <div id="fb-root"></div>
-                                    <a href={this.state.facebook} target='_blank'>
-                                        <button className="btn btn-lg btn-facebook col-12 col-sm-6 col-md-6 col-lg-3 fb-share-button" style={{marginTop: 10+'px'}}>
-                                            <span> Facebook</span>
-                                        </button>
-                                    </a>
+                                    <button id='shareBtn' className="btn btn-lg btn-facebook col-12 col-sm-6 col-md-6 col-lg-3 fb-share-button" style={{marginTop: 10+'px'}}>
+                                        <span> Facebook</span>
+                                    </button>
                                     <button className="btn btn-lg btn-google-plus col-12 col-sm-6 col-md-6 col-lg-3" style={{marginTop: 10+'px'}}><span> Google+</span></button>
                                     <button className="btn btn-lg btn-twitter col-12 col-sm-6 col-md-6 col-lg-3" style={{marginTop: 10+'px'}}><span> Twitter</span></button>
                                     <button className="btn btn-lg btn-pinterest text col-12 col-sm-6 col-md-6 col-lg-3" style={{marginTop: 10+'px'}}><i className="fa fa-file-pdf-o"></i>&nbsp;Zapisz do PDF</button>
