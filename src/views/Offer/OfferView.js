@@ -37,18 +37,18 @@ class OfferView extends Component {
     componentDidMount(){
         const apiUrl = `http://api-www.emmerson.pl/offer/`;
 
-            const url = [apiUrl + this.props.match.params.id].join("");
+        const url = [apiUrl + this.props.match.params.id].join("");
 
-            fetch(url)
-                .then(res => res.json())
-                .then(response => {
-                    this.setState({offer: response});
-                    this.setState({
-                        picture: 'https://cdn31.draftway.pl/virgofotoresizer.ashx?wym=1200_1200&id=5334657',
-                        description: this.state.offer.description.replace(/<\/?[^>]+(>|$)/g, "").substring(0,247) + '...'
-                    });
-                    this.facebookShare();
+        fetch(url)
+            .then(res => res.json())
+            .then(response => {
+                this.setState({offer: response});
+                this.setState({
+                    picture: this.state.offer.photo[0].link,
+                    description: this.state.offer.description.replace(/<\/?[^>]+(>|$)/g, "").substring(0,247) + '...'
                 });
+                this.facebookShare();
+            });
 
         window.fbAsyncInit = function() {
             FB.init({
