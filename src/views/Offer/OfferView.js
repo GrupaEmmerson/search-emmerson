@@ -68,34 +68,14 @@ class OfferView extends Component {
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
     }
-    metaRender(){
-        if(this.state.picture)
-            return(
-                <MetaTags>
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-                    <meta property="og:title" content={this.state.offer.full_location}/>
-                    <meta property="og:description" content={this.state.description}/>
-                    <meta property="og:type" content="website"/>
-                    <meta property="og:url" content={this.state.link}/>
-                    <meta property="og:site_name" content="www.emmerson.pl"/>
-                    <meta property="og:image" content={this.state.picture}/>
-                    <meta property="fb:app_id" content="1537301123055501"/>
-                </MetaTags>
-            );
-    }
 
     facebookShare(){
 
         const link = this.state.link;
         const picture = this.state.picture;
-        const name = this.state.name;
-        const caption = this.state.caption;
-        const description = this.state.description;
-        const redirect_uri = this.state.redirect_uri;
         this.setState({
             facebook: 'https://www.facebook.com/dialog/feed?app_id=1537301123055501&link='+  encodeURIComponent(link) + '&picture=' +  encodeURIComponent(picture)
         });
-
 
         console.log(this.state.facebook)
     }
@@ -110,6 +90,18 @@ class OfferView extends Component {
                 </div>
             )
         }
+
+        const link = this.state.link;
+        const picture = this.state.picture;
+        const name = this.state.name;
+        const description = this.state.description;
+
+        document.title ="Emmerson Realty S.A. - Twój partner w nieruchomościach";
+        document.getElementsByTagName("META")[6].content = name;
+        document.getElementsByTagName("META")[7].content = picture;
+        document.getElementsByTagName("META")[8].content = description;
+        document.getElementsByTagName("META")[9].content = link;
+
         return (
             <div className="container">
                 <div className='row'>
@@ -177,10 +169,6 @@ class OfferView extends Component {
                         </div>
                     </div>
                 </div>
-                {
-                    this.metaRender()
-                }
-
             </div>
         )
     }
