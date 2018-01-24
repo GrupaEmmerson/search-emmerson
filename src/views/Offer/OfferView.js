@@ -91,19 +91,17 @@ class OfferView extends Component {
             )
         }
 
-        const link = this.state.link;
-        const picture = this.state.picture;
-        const name = this.state.name;
-        const description = this.state.description;
-
-        document.title ="Emmerson Realty S.A. - Twój partner w nieruchomościach";
-        document.getElementsByTagName("META")[6].content = name;
-        document.getElementsByTagName("META")[7].content = picture;
-        document.getElementsByTagName("META")[8].content = description;
-        document.getElementsByTagName("META")[9].content = link;
-
         return (
             <div className="container">
+                <MetaTags>
+                    <meta property="og:title" content="Emmerson Realty S.A. - Twój partner w nieruchomościach"/>
+                    <meta property="og:image" content="https://cdn31.draftway.pl/virgofotoresizer.ashx?wym=1200_1200&id=5334657"/>
+                    <meta property="og:description" content="Emmerson Realty S.A., Nieruchomości, Domy, Mieszkania,"/>
+                    <meta property="og:url" content="http://test.draftway.pl"/>
+                    <meta property="og:type" content="website"/>
+                    <meta property="og:site_name" content="www.emmerson.pl"/>
+                    <meta property="fb:app_id" content="1537301123055501"/>
+                </MetaTags>
                 <div className='row'>
                     <div className='col-12 col-sm-12 col-md-12 col-lg-12' style={{backgroundColor: '#151b1e', margin: 0, padding: 0}} >
                         <div className='col-12 nopadding' style={{marginBottom: 25+'px'}}>
