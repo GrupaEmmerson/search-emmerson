@@ -7,7 +7,6 @@ import Contact from './Contact';
 import { MapOfferContainer } from './MapOfferContainer';
 import InfoOfferView from  './InfoOfferView';
 import HeaderOffer from "./HeaderOffer";
-import {Helmet} from "react-helmet";
 
 let testWeakMap = new WeakMap();
 
@@ -91,7 +90,9 @@ class OfferView extends Component {
                         'og:caption': caption,
                         'og:description': description,
                         'og:redirect_uri': redirect_uri,
-                        'og:image': picture
+                        'og:image': picture,
+                        'og:image:width': 1200,
+                        'og:image:height': 628
                     }
                 })
             }, function(response) {
@@ -112,15 +113,6 @@ class OfferView extends Component {
         }
         return (
             <div className="container">
-                <Helmet>
-                    <meta property="og:title" content={this.state.name} data-doc-meta="true"/>
-                    <meta property="og:type" content="website" data-doc-meta="true"/>
-                    <meta property="og:url" content={this.state.link} data-doc-meta="true"/>
-                    <meta property="og:image" content={this.state.picture} data-doc-meta="true"/>
-                    <meta property="og:description" content={this.state.description} data-doc-meta="true"/>
-                    <meta property="og:site_name" content={this.state.name} data-doc-meta="true"/>
-                    <meta property="fb:app_id" content="1537301123055501" data-doc-meta="true"/>
-                </Helmet>
                 <div className='row'>
                     <div className='col-12 col-sm-12 col-md-12 col-lg-12' style={{backgroundColor: '#151b1e', margin: 0, padding: 0}} >
                         <div className='col-12 nopadding' style={{marginBottom: 25+'px'}}>
