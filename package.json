@@ -68,6 +68,7 @@
     "react-router-dom": "^4.1.2",
     "react-search-input": "^0.11.2",
     "react-slick": "^0.16.0",
+    "react-social": "^1.10.0",
     "react-transition-group": "^1.2.0",
     "reactstrap": "^4.8.0",
     "redux": "^3.6.0",

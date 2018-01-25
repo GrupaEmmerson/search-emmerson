@@ -7,7 +7,7 @@ import Contact from './Contact';
 import { MapOfferContainer } from './MapOfferContainer';
 import InfoOfferView from  './InfoOfferView';
 import HeaderOffer from "./HeaderOffer";
-import { FacebookButton } from "react-social";
+import { FacebookButton, GooglePlusButton, TwitterButton } from "react-social";
 
 let testWeakMap = new WeakMap();
 
@@ -163,8 +163,12 @@ class OfferView extends Component {
                                     <FacebookButton id='shareBtn' url={this.state.link} appId={this.state.appId} media={this.state.picture} className="btn btn-lg btn-facebook col-12 col-sm-6 col-md-6 col-lg-3 fb-share-button" style={{marginTop: 10+'px'}}>
                                         <span> Facebook</span>
                                     </FacebookButton>
-                                    <button className="btn btn-lg btn-google-plus col-12 col-sm-6 col-md-6 col-lg-3" style={{marginTop: 10+'px'}}><span> Google+</span></button>
-                                    <button className="btn btn-lg btn-twitter col-12 col-sm-6 col-md-6 col-lg-3" style={{marginTop: 10+'px'}}><span> Twitter</span></button>
+                                    <GooglePlusButton url={this.state.link} appId={this.state.appId} media={this.state.picture} className="btn btn-lg btn-google-plus col-12 col-sm-6 col-md-6 col-lg-3" style={{marginTop: 10+'px'}}>
+                                        <span> Google+</span>
+                                    </GooglePlusButton>
+                                    <TwitterButton url={this.state.link} appId={this.state.appId} media={this.state.picture} className="btn btn-lg btn-twitter col-12 col-sm-6 col-md-6 col-lg-3" style={{marginTop: 10+'px'}}>
+                                        <span> Twitter</span>
+                                    </TwitterButton>
                                     <button className="btn btn-lg btn-pinterest text col-12 col-sm-6 col-md-6 col-lg-3" style={{marginTop: 10+'px'}}><i className="fa fa-file-pdf-o"></i>&nbsp;Zapisz do PDF</button>
                                 </div>
 
